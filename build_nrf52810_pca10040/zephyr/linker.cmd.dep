@@ -1,0 +1,35 @@
+zephyr/linker.cmd: \
+ C:/Users/Olle/Documents/ncs/ncs/zephyr/soc/arm/nordic_nrf/nrf52/linker.ld \
+ C:/Users/Olle/Documents/ncs/ncs/zephyr/include/arch/arm/cortex_m/scripts/linker.ld \
+ C:/Users/Olle/Documents/ncs/ncs/nrf/samples/bluetooth/peripheral_uart/build_nrf52810_pca10040/zephyr/include/generated/autoconf.h \
+ C:/Users/Olle/Documents/ncs/ncs/zephyr/include/linker/sections.h \
+ C:/Users/Olle/Documents/ncs/ncs/zephyr/include/linker/section_tags.h \
+ C:/Users/Olle/Documents/ncs/ncs/zephyr/include/toolchain.h \
+ C:/Users/Olle/Documents/ncs/ncs/zephyr/include/toolchain/gcc.h \
+ C:/Users/Olle/Documents/ncs/ncs/zephyr/include/toolchain/common.h \
+ C:/Users/Olle/Documents/ncs/ncs/zephyr/lib/libc/minimal/include/stdbool.h \
+ C:/Users/Olle/Documents/ncs/ncs/zephyr/include/generated_dts_board.h \
+ C:/Users/Olle/Documents/ncs/ncs/nrf/samples/bluetooth/peripheral_uart/build_nrf52810_pca10040/zephyr/include/generated/generated_dts_board_unfixed.h \
+ C:/Users/Olle/Documents/ncs/ncs/nrf/samples/bluetooth/peripheral_uart/build_nrf52810_pca10040/zephyr/include/generated/generated_dts_board_unfixed.h.deprecated \
+ C:/Users/Olle/Documents/ncs/ncs/nrf/samples/bluetooth/peripheral_uart/build_nrf52810_pca10040/zephyr/include/generated/generated_dts_board_fixups.h \
+ C:/Users/Olle/Documents/ncs/ncs/zephyr/include/linker/linker-defs.h \
+ C:/Users/Olle/Documents/ncs/ncs/zephyr/include/sys/util.h \
+ C:/Users/Olle/Documents/ncs/ncs/nrf/samples/bluetooth/peripheral_uart/build_nrf52810_pca10040/zephyr/include/generated/offsets.h \
+ C:/Users/Olle/Documents/ncs/ncs/zephyr/include/linker/linker-tool.h \
+ C:/Users/Olle/Documents/ncs/ncs/zephyr/include/linker/linker-tool-gcc.h \
+ C:/Users/Olle/Documents/ncs/ncs/zephyr/include/linker/rel-sections.ld \
+ C:/Users/Olle/Documents/ncs/ncs/zephyr/include/linker/priv_stacks-text.ld \
+ C:/Users/Olle/Documents/ncs/ncs/zephyr/include/linker/kobject-text.ld \
+ C:/Users/Olle/Documents/ncs/ncs/zephyr/include/linker/common-rom.ld \
+ C:/Users/Olle/Documents/ncs/ncs/nrf/samples/bluetooth/peripheral_uart/build_nrf52810_pca10040/zephyr/include/generated/snippets-rodata.ld \
+ C:/Users/Olle/Documents/ncs/ncs/zephyr/include/linker/priv_stacks-rom.ld \
+ C:/Users/Olle/Documents/ncs/ncs/zephyr/include/linker/kobject-rom.ld \
+ C:/Users/Olle/Documents/ncs/ncs/nrf/samples/bluetooth/peripheral_uart/build_nrf52810_pca10040/zephyr/include/generated/snippets-ram-sections.ld \
+ C:/Users/Olle/Documents/ncs/ncs/nrf/samples/bluetooth/peripheral_uart/build_nrf52810_pca10040/zephyr/include/generated/snippets-noinit.ld \
+ C:/Users/Olle/Documents/ncs/ncs/nrf/samples/bluetooth/peripheral_uart/build_nrf52810_pca10040/zephyr/include/generated/snippets-rwdata.ld \
+ C:/Users/Olle/Documents/ncs/ncs/zephyr/include/linker/common-ram.ld \
+ C:/Users/Olle/Documents/ncs/ncs/zephyr/include/linker/priv_stacks.ld \
+ C:/Users/Olle/Documents/ncs/ncs/zephyr/include/linker/kobject.ld \
+ C:/Users/Olle/Documents/ncs/ncs/zephyr/include/linker/priv_stacks-noinit.ld \
+ C:/Users/Olle/Documents/ncs/ncs/nrf/samples/bluetooth/peripheral_uart/build_nrf52810_pca10040/zephyr/include/generated/snippets-sections.ld \
+ C:/Users/Olle/Documents/ncs/ncs/zephyr/include/linker/debug-sections.ld

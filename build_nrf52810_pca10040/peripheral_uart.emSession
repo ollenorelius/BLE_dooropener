@@ -1,0 +1,95 @@
+<!DOCTYPE CrossStudio_Session_File>
+<session>
+ <Bookmarks/>
+ <Breakpoints groups="Breakpoints" active_group="Breakpoints">
+  <BreakpointListItem trigger="" line="749" counter="0" hardwareBreakpoint="" isFunctionBreakpoint="false" action="" expression="" group="Breakpoints" type="Breakpoint" state="2" filename="../src/main.c" useHWbreakpoint="false"/>
+  <Exceptions set="MemManage;UsageFault_Coprocessor;UsageFault_CheckingError;UsageFault_StateError;BusFault;ExceptionEntryReturnFault;HardFault"/>
+ </Breakpoints>
+ <ExecutionProfileWindow/>
+ <FrameBufferWindow>
+  <FrameBufferWindow bufferHeight="-1" addressSpace="" addressText="" bufferWidth="-1"/>
+ </FrameBufferWindow>
+ <Memory1>
+  <MemoryWindow addressSpace="" dataSize="1" autoEvaluate="0" viewMode="0" addressOrder="0" columnsText="" refreshPeriod="0" name="zephyr/zephyr.elf" radix="16" sizeText="16" addressText="0x20003b98"/>
+ </Memory1>
+ <Memory2>
+  <MemoryWindow addressSpace="" dataSize="1" autoEvaluate="0" viewMode="0" addressOrder="0" columnsText="" refreshPeriod="0" name="zephyr/zephyr.elf" radix="16" sizeText="" addressText=""/>
+ </Memory2>
+ <Memory3>
+  <MemoryWindow addressSpace="" dataSize="1" autoEvaluate="0" viewMode="0" addressOrder="0" columnsText="" refreshPeriod="0" name="zephyr/zephyr.elf" radix="16" sizeText="" addressText=""/>
+ </Memory3>
+ <Memory4>
+  <MemoryWindow addressSpace="" dataSize="1" autoEvaluate="0" viewMode="0" addressOrder="0" columnsText="" refreshPeriod="0" name="zephyr/zephyr.elf" radix="16" sizeText="" addressText=""/>
+ </Memory4>
+ <Project>
+  <ProjectSessionItem path="peripheral_uart"/>
+  <ProjectSessionItem path="peripheral_uart;dts files"/>
+  <ProjectSessionItem path="peripheral_uart;build"/>
+  <ProjectSessionItem path="peripheral_uart;build;all"/>
+  <ProjectSessionItem path="peripheral_uart;build;app/libapp.a"/>
+  <ProjectSessionItem path="peripheral_uart;build;app/libapp.a;C_COMPILER__app"/>
+  <ProjectSessionItem path="peripheral_uart;build;zephyr/arch/arm/core/libarch__arm__core.a"/>
+  <ProjectSessionItem path="peripheral_uart;build;zephyr/arch/arm/core/libarch__arm__core.a;ASM_COMPILER__arch__arm__core"/>
+  <ProjectSessionItem path="peripheral_uart;build;zephyr/drivers/entropy/libdrivers__entropy.a"/>
+  <ProjectSessionItem path="peripheral_uart;build;zephyr/drivers/entropy/libdrivers__entropy.a;C_COMPILER__drivers__entropy"/>
+  <ProjectSessionItem path="peripheral_uart;build;zephyr/drivers/pwm/libdrivers__pwm.a"/>
+  <ProjectSessionItem path="peripheral_uart;build;zephyr/drivers/pwm/libdrivers__pwm.a;C_COMPILER__drivers__pwm"/>
+  <ProjectSessionItem path="peripheral_uart;build;zephyr/drivers/serial/libdrivers__serial.a"/>
+  <ProjectSessionItem path="peripheral_uart;build;zephyr/drivers/serial/libdrivers__serial.a;C_COMPILER__drivers__serial"/>
+  <ProjectSessionItem path="peripheral_uart;build;zephyr/kernel/libkernel.a"/>
+  <ProjectSessionItem path="peripheral_uart;build;zephyr/kernel/libkernel.a;C_COMPILER__kernel"/>
+  <ProjectSessionItem path="peripheral_uart;build;zephyr/lib/libc/minimal/liblib__libc__minimal.a"/>
+  <ProjectSessionItem path="peripheral_uart;build;zephyr/lib/libc/minimal/liblib__libc__minimal.a;C_COMPILER__lib__libc__minimal"/>
+  <ProjectSessionItem path="peripheral_uart;build;zephyr/libzephyr.a"/>
+  <ProjectSessionItem path="peripheral_uart;build;zephyr/libzephyr.a;C_COMPILER__zephyr"/>
+  <ProjectSessionItem path="peripheral_uart;build;zephyr/subsys/bluetooth/controller/libsubsys__bluetooth__controller.a"/>
+  <ProjectSessionItem path="peripheral_uart;build;zephyr/subsys/bluetooth/controller/libsubsys__bluetooth__controller.a;C_COMPILER__subsys__bluetooth__controller"/>
+  <ProjectSessionItem path="peripheral_uart;build;zephyr/zephyr.elf"/>
+  <ProjectSessionItem path="peripheral_uart;build;zephyr/zephyr.elf;C_COMPILER__zephyr_final"/>
+  <ProjectSessionItem path="peripheral_uart;build;zephyr/zephyr_prebuilt.elf"/>
+  <ProjectSessionItem path="peripheral_uart;build;zephyr/zephyr_prebuilt.elf;C_COMPILER__zephyr_prebuilt"/>
+ </Project>
+ <Register1>
+  <RegisterWindow visibleNodes="CPU - Current Context/r0;CPU - Current Context/r1;CPU - Current Context/r2;CPU - Current Context/r3;CPU - Current Context/r4;CPU - Current Context/r5;CPU - Current Context/r6;CPU - Current Context/r7;CPU - Current Context/r8;CPU - Current Context/r9;CPU - Current Context/r10;CPU - Current Context/r11;CPU - Current Context/r12;CPU - Current Context/sp(r13);CPU - Current Context/lr(r14);CPU - Current Context/pc(r15);CPU - Current Context/apsr;CPU/r0;CPU/r1;CPU/r2;CPU/r3;CPU/r4;CPU/r5;CPU/r6;CPU/r7;CPU/r8;CPU/r9;CPU/r10;CPU/r11;CPU/r12;CPU/sp(r13);CPU/lr(r14);CPU/pc(r15);CPU/xpsr;CPU/msp;CPU/psp;CPU/cfbp;CPU/internal" binaryNodes="" asciiNodes="" openNodes="CPU - Current Context" name="zephyr/zephyr.elf" decimalNodes="" octalNodes="" unsignedNodes=""/>
+ </Register1>
+ <Register2>
+  <RegisterWindow visibleNodes="CPU - Current Context/r0;CPU - Current Context/r1;CPU - Current Context/r2;CPU - Current Context/r3;CPU - Current Context/r4;CPU - Current Context/r5;CPU - Current Context/r6;CPU - Current Context/r7;CPU - Current Context/r8;CPU - Current Context/r9;CPU - Current Context/r10;CPU - Current Context/r11;CPU - Current Context/r12;CPU - Current Context/sp(r13);CPU - Current Context/lr(r14);CPU - Current Context/pc(r15);CPU - Current Context/apsr;CPU/r0;CPU/r1;CPU/r2;CPU/r3;CPU/r4;CPU/r5;CPU/r6;CPU/r7;CPU/r8;CPU/r9;CPU/r10;CPU/r11;CPU/r12;CPU/sp(r13);CPU/lr(r14);CPU/pc(r15);CPU/xpsr;CPU/msp;CPU/psp;CPU/cfbp;CPU/internal" binaryNodes="" asciiNodes="" openNodes="CPU - Current Context" name="zephyr/zephyr.elf" decimalNodes="" octalNodes="" unsignedNodes=""/>
+ </Register2>
+ <Register3>
+  <RegisterWindow visibleNodes="CPU - Current Context/r0;CPU - Current Context/r1;CPU - Current Context/r2;CPU - Current Context/r3;CPU - Current Context/r4;CPU - Current Context/r5;CPU - Current Context/r6;CPU - Current Context/r7;CPU - Current Context/r8;CPU - Current Context/r9;CPU - Current Context/r10;CPU - Current Context/r11;CPU - Current Context/r12;CPU - Current Context/sp(r13);CPU - Current Context/lr(r14);CPU - Current Context/pc(r15);CPU - Current Context/apsr;CPU/r0;CPU/r1;CPU/r2;CPU/r3;CPU/r4;CPU/r5;CPU/r6;CPU/r7;CPU/r8;CPU/r9;CPU/r10;CPU/r11;CPU/r12;CPU/sp(r13);CPU/lr(r14);CPU/pc(r15);CPU/xpsr;CPU/msp;CPU/psp;CPU/cfbp;CPU/internal" binaryNodes="" asciiNodes="" openNodes="CPU - Current Context" name="zephyr/zephyr.elf" decimalNodes="" octalNodes="" unsignedNodes=""/>
+ </Register3>
+ <Register4>
+  <RegisterWindow visibleNodes="CPU - Current Context/r0;CPU - Current Context/r1;CPU - Current Context/r2;CPU - Current Context/r3;CPU - Current Context/r4;CPU - Current Context/r5;CPU - Current Context/r6;CPU - Current Context/r7;CPU - Current Context/r8;CPU - Current Context/r9;CPU - Current Context/r10;CPU - Current Context/r11;CPU - Current Context/r12;CPU - Current Context/sp(r13);CPU - Current Context/lr(r14);CPU - Current Context/pc(r15);CPU - Current Context/apsr;CPU/r0;CPU/r1;CPU/r2;CPU/r3;CPU/r4;CPU/r5;CPU/r6;CPU/r7;CPU/r8;CPU/r9;CPU/r10;CPU/r11;CPU/r12;CPU/sp(r13);CPU/lr(r14);CPU/pc(r15);CPU/xpsr;CPU/msp;CPU/psp;CPU/cfbp;CPU/internal" binaryNodes="" asciiNodes="" openNodes="CPU - Current Context" name="zephyr/zephyr.elf" decimalNodes="" octalNodes="" unsignedNodes=""/>
+ </Register4>
+ <Threads>
+  <ThreadsWindow showLists=""/>
+ </Threads>
+ <TraceWindow>
+  <Trace enabled="Yes"/>
+ </TraceWindow>
+ <Watch1>
+  <Watches active="1" update="Never">
+   <Watchpoint expression="vcc" name="vcc" radix="16" linenumber="565" filename="../src/main.c"/>
+  </Watches>
+ </Watch1>
+ <Watch2>
+  <Watches active="0" update="Never"/>
+ </Watch2>
+ <Watch3>
+  <Watches active="0" update="Never"/>
+ </Watch3>
+ <Watch4>
+  <Watches active="0" update="Never"/>
+ </Watch4>
+ <Files>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="748" useTextEdit="1" useBinaryEdit="0" left="0" path="../src/main.c" selected="1" top="556" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="6" useTextEdit="1" useBinaryEdit="0" left="0" path="../src/board_functions.c" selected="0" top="51" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="20" useTextEdit="1" useBinaryEdit="0" left="0" path="../CMakeLists.txt" selected="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="8" useTextEdit="1" useBinaryEdit="0" left="0" path="../src/board_functions.h" selected="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="5" useTextEdit="1" useBinaryEdit="0" left="0" path="../src/adc.h" selected="0" top="0" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="1963" useTextEdit="1" useBinaryEdit="0" left="0" path="../../../../../zephyr/ext/hal/nordic/nrfx/mdk/nrf52810.h" selected="0" top="1915" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="97" useTextEdit="1" useBinaryEdit="0" left="0" path="../../../../../zephyr/drivers/entropy/entropy_nrf5.c" selected="0" top="76" codecName="Default"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="138" useTextEdit="1" useBinaryEdit="0" left="0" path="../../../../../zephyr/arch/arm/core/cpu_idle.S" selected="0" top="109" codecName=""/>
+ </Files>
+ <ARMCrossStudioWindow activeProject="zephyr/zephyr.elf(build)" fileDialogDefaultFilter="*.c" autoConnectTarget="J-Link" buildConfiguration="Common" sessionSettings="" debugSearchFileMap="" fileDialogInitialDirectory="" debugSearchPath="" autoConnectCapabilities="3711"/>
+</session>

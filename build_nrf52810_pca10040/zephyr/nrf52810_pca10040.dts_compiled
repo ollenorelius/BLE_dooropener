@@ -1,0 +1,362 @@
+/dts-v1/;
+
+/ {
+	#address-cells = < 0x01 >;
+	#size-cells = < 0x01 >;
+	model = "Nordic PCA10040 Dev Kit";
+	compatible = "nordic,pca10040-dk", "nordic,nrf52810-qfaa", "nordic,nrf52810";
+
+	chosen {
+		zephyr,console = "/soc/uart@40002000";
+		zephyr,shell-uart = "/soc/uart@40002000";
+		zephyr,uart-mcumgr = "/soc/uart@40002000";
+		zephyr,bt-mon-uart = "/soc/uart@40002000";
+		zephyr,bt-c2h-uart = "/soc/uart@40002000";
+		zephyr,sram = "/soc/memory@20000000";
+		zephyr,flash = "/soc/flash-controller@4001e000/flash@0";
+		zephyr,code-partition = "/soc/flash-controller@4001e000/flash@0/partitions/partition@c000";
+	};
+
+	aliases {
+		i2c-0 = "/soc/i2c@40003000";
+		spi-0 = "/soc/spi@40004000";
+		uart-0 = "/soc/uart@40002000";
+		adc-0 = "/soc/adc@40007000";
+		gpio-0 = "/soc/gpio@50000000";
+		gpiote-0 = "/soc/gpiote@40006000";
+		wdt-0 = "/soc/watchdog@40010000";
+		pwm-0 = "/soc/pwm@4001c000";
+		qdec-0 = "/soc/qdec@40012000";
+		rtc-0 = "/soc/rtc@4000b000";
+		rtc-1 = "/soc/rtc@40011000";
+		timer-0 = "/soc/timer@40008000";
+		timer-1 = "/soc/timer@40009000";
+		timer-2 = "/soc/timer@4000a000";
+		led0 = "/leds/led_0";
+		led1 = "/leds/led_1";
+		led2 = "/leds/led_0";
+		led3 = "/leds/led_1";
+		sw0 = "/gpio_keys/button_0";
+		sw1 = "/gpio_keys/button_1";
+		sw2 = "/gpio_keys/button_2";
+		sw3 = "/gpio_keys/button_3";
+		pwm-led0 = "/pwmleds/pwmled0";
+	};
+
+	soc {
+		#address-cells = < 0x01 >;
+		#size-cells = < 0x01 >;
+		compatible = "nordic,nRF52810-QFAA", "nordic,nRF52810", "nordic,nRF52", "simple-bus";
+		interrupt-parent = < 0x01 >;
+		ranges;
+
+		nvic: interrupt-controller@e000e100 {
+			compatible = "arm,v7m-nvic";
+			reg = < 0xe000e100 0xc00 >;
+			interrupt-controller;
+			#interrupt-cells = < 0x02 >;
+			arm,num-irq-priority-bits = < 0x03 >;
+			phandle = < 0x01 >;
+		};
+
+		systick: timer@e000e010 {
+			compatible = "arm,armv7m-systick";
+			reg = < 0xe000e010 0x10 >;
+			status = "disabled";
+		};
+
+		flash-controller@4001e000 {
+			compatible = "nordic,nrf52-flash-controller";
+			reg = < 0x4001e000 0x1000 >;
+			#address-cells = < 0x01 >;
+			#size-cells = < 0x01 >;
+			label = "NRF_FLASH_DRV_NAME";
+
+			flash0: flash@0 {
+				compatible = "soc-nv-flash";
+				label = "NRF_FLASH";
+				erase-block-size = < 0x1000 >;
+				write-block-size = < 0x04 >;
+				reg = < 0x00 0x30000 >;
+
+				partitions {
+					compatible = "fixed-partitions";
+					#address-cells = < 0x01 >;
+					#size-cells = < 0x01 >;
+
+					boot_partition: partition@0 {
+						label = "mcuboot";
+						reg = < 0x00 0xc000 >;
+					};
+
+					slot0_partition: partition@c000 {
+						label = "image-0";
+						reg = < 0xc000 0xd000 >;
+					};
+
+					slot1_partition: partition@19000 {
+						label = "image-1";
+						reg = < 0x19000 0xd000 >;
+					};
+
+					scratch_partition: partition@26000 {
+						label = "image-scratch";
+						reg = < 0x26000 0x3000 >;
+					};
+
+					storage_partition: partition@29000 {
+						label = "storage";
+						reg = < 0x29000 0x7000 >;
+					};
+				};
+			};
+		};
+
+		sram0: memory@20000000 {
+			compatible = "mmio-sram";
+			reg = < 0x20000000 0x6000 >;
+		};
+
+		adc: adc@40007000 {
+			compatible = "nordic,nrf-saadc";
+			reg = < 0x40007000 0x1000 >;
+			interrupts = < 0x07 0x01 >;
+			status = "okay";
+			label = "ADC_0";
+		};
+
+		clock: clock@40000000 {
+			compatible = "nordic,nrf-clock";
+			reg = < 0x40000000 0x1000 >;
+			interrupts = < 0x00 0x01 >;
+			status = "okay";
+			label = "CLOCK";
+		};
+
+		uart0: uart@40002000 {
+			reg = < 0x40002000 0x1000 >;
+			interrupts = < 0x02 0x01 >;
+			status = "okay";
+			label = "UART_0";
+			compatible = "nordic,nrf-uarte";
+			current-speed = < 0x1c200 >;
+			tx-pin = < 0x06 >;
+			rx-pin = < 0x08 >;
+			rts-pin = < 0x05 >;
+			cts-pin = < 0x07 >;
+		};
+
+		gpiote: gpiote@40006000 {
+			compatible = "nordic,nrf-gpiote";
+			reg = < 0x40006000 0x1000 >;
+			interrupts = < 0x06 0x05 >;
+			status = "okay";
+			label = "GPIOTE_0";
+		};
+
+		gpio0: gpio@50000000 {
+			compatible = "nordic,nrf-gpio";
+			gpio-controller;
+			reg = < 0x50000000 0x1000 >;
+			#gpio-cells = < 0x02 >;
+			label = "GPIO_0";
+			status = "okay";
+			phandle = < 0x02 >;
+		};
+
+		i2c0: i2c@40003000 {
+			compatible = "nordic,nrf-i2c";
+			#address-cells = < 0x01 >;
+			#size-cells = < 0x00 >;
+			reg = < 0x40003000 0x1000 >;
+			clock-frequency = < 0x186a0 >;
+			interrupts = < 0x03 0x01 >;
+			status = "okay";
+			label = "I2C_0";
+			sda-pin = < 0x1a >;
+			scl-pin = < 0x1b >;
+		};
+
+		pwm0: pwm@4001c000 {
+			compatible = "nordic,nrf-pwm";
+			reg = < 0x4001c000 0x1000 >;
+			interrupts = < 0x1c 0x01 >;
+			status = "okay";
+			label = "PWM_0";
+			#pwm-cells = < 0x00 >;
+			ch0-pin = < 0x0b >;
+			ch1-pin = < 0x17 >;
+			phandle = < 0x03 >;
+		};
+
+		qdec: qdec@40012000 {
+			compatible = "nordic,nrf-qdec";
+			reg = < 0x40012000 0x1000 >;
+			interrupts = < 0x12 0x01 >;
+			status = "disabled";
+			label = "QDEC";
+		};
+
+		spi0: spi@40004000 {
+			compatible = "nordic,nrf-spi";
+			#address-cells = < 0x01 >;
+			#size-cells = < 0x00 >;
+			reg = < 0x40004000 0x1000 >;
+			interrupts = < 0x04 0x01 >;
+			status = "okay";
+			label = "SPI_0";
+			sck-pin = < 0x1d >;
+			mosi-pin = < 0x1f >;
+			miso-pin = < 0x1e >;
+		};
+
+		rtc0: rtc@4000b000 {
+			compatible = "nordic,nrf-rtc";
+			reg = < 0x4000b000 0x1000 >;
+			interrupts = < 0x0b 0x01 >;
+			status = "okay";
+			clock-frequency = < 0x8000 >;
+			prescaler = < 0x01 >;
+			label = "RTC_0";
+		};
+
+		rtc1: rtc@40011000 {
+			compatible = "nordic,nrf-rtc";
+			reg = < 0x40011000 0x1000 >;
+			interrupts = < 0x11 0x01 >;
+			status = "okay";
+			clock-frequency = < 0x8000 >;
+			prescaler = < 0x01 >;
+			label = "RTC_1";
+		};
+
+		timer0: timer@40008000 {
+			compatible = "nordic,nrf-timer";
+			status = "okay";
+			reg = < 0x40008000 0x1000 >;
+			interrupts = < 0x08 0x01 >;
+			prescaler = < 0x00 >;
+			label = "TIMER_0";
+		};
+
+		timer1: timer@40009000 {
+			compatible = "nordic,nrf-timer";
+			status = "okay";
+			reg = < 0x40009000 0x1000 >;
+			interrupts = < 0x09 0x01 >;
+			prescaler = < 0x00 >;
+			label = "TIMER_1";
+		};
+
+		timer2: timer@4000a000 {
+			compatible = "nordic,nrf-timer";
+			status = "okay";
+			reg = < 0x4000a000 0x1000 >;
+			interrupts = < 0x0a 0x01 >;
+			prescaler = < 0x00 >;
+			label = "TIMER_2";
+		};
+
+		temp: temp@4000c000 {
+			compatible = "nordic,nrf-temp";
+			reg = < 0x4000c000 0x1000 >;
+			interrupts = < 0x0c 0x01 >;
+			status = "okay";
+			label = "TEMP_0";
+		};
+
+		wdt: watchdog@40010000 {
+			compatible = "nordic,nrf-watchdog";
+			reg = < 0x40010000 0x1000 >;
+			interrupts = < 0x10 0x01 >;
+			status = "okay";
+			label = "WDT";
+		};
+	};
+
+	sw_pwm: sw-pwm {
+		compatible = "nordic,nrf-sw-pwm";
+		status = "disabled";
+		label = "SW_PWM";
+		timer-instance = < 0x02 >;
+		channel-count = < 0x03 >;
+		clock-prescaler = < 0x00 >;
+		ppi-base = < 0x0e >;
+		gpiote-base = < 0x00 >;
+	};
+
+	cpus {
+		#address-cells = < 0x01 >;
+		#size-cells = < 0x00 >;
+
+		cpu@0 {
+			device_type = "cpu";
+			compatible = "arm,cortex-m4";
+			reg = < 0x00 >;
+		};
+	};
+
+	leds {
+		compatible = "gpio-leds";
+
+		led0: led_0 {
+			gpios = < 0x02 0x12 0x04 >;
+			label = "Red LED";
+		};
+
+		led1: led_1 {
+			gpios = < 0x02 0x0b 0x04 >;
+			label = "Blue LED";
+		};
+
+		fivevolt: five_volt {
+			gpios = < 0x02 0x0a 0x04 >;
+			label = "5V Enable";
+		};
+
+		servo_out: servo_out {
+			gpios = < 0x02 0x17 0x04 >;
+			label = "Servo signal output";
+		};
+	};
+
+	pwmleds {
+		compatible = "pwm-leds";
+
+		pwmled0: pwmled0 {
+			pwms = < 0x03 >;
+			label = "pwm-led-1";
+			channel = < 0x0b >;
+		};
+
+		servopwm: servopwm {
+			pwms = < 0x03 >;
+			label = "pwm-servo";
+			channel = < 0x17 >;
+		};
+	};
+
+	gpio_keys {
+		compatible = "gpio-keys";
+
+		button0: button_0 {
+			label = "Push button switch 0";
+			gpios = < 0x02 0x0d 0x100 >;
+		};
+
+		button1: button_1 {
+			label = "Push button switch 1";
+			gpios = < 0x02 0x0e 0x100 >;
+		};
+
+		button2: button_2 {
+			label = "Push button switch 2";
+			gpios = < 0x02 0x0f 0x100 >;
+		};
+
+		button3: button_3 {
+			label = "Push button switch 3";
+			gpios = < 0x02 0x10 0x100 >;
+		};
+	};
+};

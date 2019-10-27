@@ -1,0 +1,542 @@
+--- poll.c -- 111 ------------------------------------------
+/* must be called with interrupts locked */
+static inline int register_event(struct k_poll_event *event,
+struct _poller *poller)
+{
+switch (event->type) {
+    2B02        cmp r3, #2
+    D007        beq 0x00011262
+    2B04        cmp r3, #4
+    D00F        beq 0x00011276
+    2B01        cmp r3, #1
+    D109        bne 0x0001126E
+--- poll.c -- 122 ------------------------------------------
+add_event(&event->queue->poll_events, event, poller);
+break;
+case K_POLL_TYPE_SIGNAL:
+__ASSERT(event->signal != NULL, "invalid poll signal\n");
+add_event(&event->signal->poll_events, event, poller);
+    466A        mov r2, sp
+    4621        mov r1, r4
+    6920        ldr r0, [r4, #16]
+    E003        b 0x0001126A
+--- poll.c -- 118 ------------------------------------------
+add_event(&event->sem->poll_events, event, poller);
+    6920        ldr r0, [r4, #16]
+    466A        mov r2, sp
+    4621        mov r1, r4
+    3010        adds r0, #16
+--- poll.c -- 122 ------------------------------------------
+add_event(&event->queue->poll_events, event, poller);
+break;
+case K_POLL_TYPE_SIGNAL:
+__ASSERT(event->signal != NULL, "invalid poll signal\n");
+add_event(&event->signal->poll_events, event, poller);
+    F005FC90    bl 0x00016B8E <add_event>
+--- poll.c -- 132 ------------------------------------------
+__ASSERT(false, "invalid event type\n");
+break;
+}
+event->poller = poller;
+    F8C4D008    str.w sp, [r4, #8]
+--- poll.c -- 209 ------------------------------------------
+poller.is_polling = false;
+} else if (timeout != K_NO_WAIT && poller.is_polling) {
+rc = register_event(&events[ii], &poller);
+if (rc == 0) {
+++last_registered;
+    3501        adds r5, #1
+    E7DD        b 0x00011232
+--- poll.c -- 122 ------------------------------------------
+add_event(&event->queue->poll_events, event, poller);
+    6920        ldr r0, [r4, #16]
+    466A        mov r2, sp
+    4621        mov r1, r4
+    3008        adds r0, #8
+    E7F4        b 0x0001126A
+--- poll.c -- 230 ------------------------------------------
+k_spin_unlock(&lock, key);
+return 0;
+}
+poller.is_polling = false;
+    2300        movs r3, #0
+    F88D3004    strb.w r3, [sp, #4]
+--- poll.c -- 235 ------------------------------------------
+if (timeout == K_NO_WAIT) {
+    F1B80F00    cmp.w r8, #0
+    D109        bne 0x000112A0
+--- asm_inline_gcc.h -- 127 --------------------------------
+"cpsie i;"
+"isb"
+: : : "memory");
+#elif defined(CONFIG_ARMV7_M_ARMV8_M_MAINLINE)
+__asm__ volatile(
+    F3868811    msr basepri, r6
+    F3BF8F6F    isb
+--- poll.c -- 234 ------------------------------------------
+poller.is_polling = false;
+if (timeout == K_NO_WAIT) {
+k_spin_unlock(&lock, key);
+return -EAGAIN;
+    F06F040A    mvn r4, #10
+--- poll.c -- 255 ------------------------------------------
+clear_event_registrations(events, last_registered, key);
+k_spin_unlock(&lock, key);
+return swap_rc;
+}
+    4620        mov r0, r4
+    B005        add sp, sp, #20
+    E8BD8FF0    pop.w {r4-r11, pc}
+--- poll.c -- 241 ------------------------------------------
+_wait_q_t wait_q = Z_WAIT_Q_INIT(&wait_q);
+    AA02        add r2, sp, #8
+--- poll.c -- 242 ------------------------------------------
+int swap_rc = z_pend_curr(&lock, key, &wait_q, timeout);
+    4643        mov r3, r8
+    4631        mov r1, r6
+    4808        ldr r0, =0x200022A9 <lock>
+--- poll.c -- 241 ------------------------------------------
+_wait_q_t wait_q = Z_WAIT_Q_INIT(&wait_q);
+    E9CD2202    strd r2, r2, [sp, #8]
+--- poll.c -- 242 ------------------------------------------
+int swap_rc = z_pend_curr(&lock, key, &wait_q, timeout);
+    F7FFFC4A    bl 0x00010B44 <z_pend_curr>
+    4604        mov r4, r0
+--- asm_inline_gcc.h -- 81 ---------------------------------
+: "memory");
+#elif defined(CONFIG_ARMV7_M_ARMV8_M_MAINLINE)
+unsigned int tmp;
+__asm__ volatile(
+    F04F0320    mov.w r3, #32
+    F3EF8611    mrs r6, basepri
+    F3838811    msr basepri, r3
+    F3BF8F6F    isb
+    E78A        b 0x000111DA
+    1F00        subs r0, r0, #4
+    2000        movs r0, #0
+    200022A9    .word 0x200022A9
+--- poll.c -- 417 ------------------------------------------
+}
+#endif
+int z_impl_k_poll_signal_raise(struct k_poll_signal *signal, int result)
+{
+    B538        push {r3-r5, lr}
+--- asm_inline_gcc.h -- 81 ---------------------------------
+: "memory");
+#elif defined(CONFIG_ARMV7_M_ARMV8_M_MAINLINE)
+unsigned int tmp;
+__asm__ volatile(
+    F04F0320    mov.w r3, #32
+    F3EF8511    mrs r5, basepri
+    F3838811    msr basepri, r3
+    F3BF8F6F    isb
+--- dlist.h -- 261 -----------------------------------------
+*/
+static inline bool sys_dlist_is_empty(sys_dlist_t *list)
+{
+return list->head == list;
+    6803        ldr r3, [r0]
+--- poll.c -- 421 ------------------------------------------
+{
+k_spinlock_key_t key = k_spin_lock(&lock);
+struct k_poll_event *poll_event;
+signal->result = result;
+    60C1        str r1, [r0, #12]
+--- dlist.h -- 538 -----------------------------------------
+static inline sys_dnode_t *sys_dlist_get(sys_dlist_t *list)
+{
+sys_dnode_t *node = NULL;
+if (!sys_dlist_is_empty(list)) {
+    4298        cmp r0, r3
+--- poll.c -- 422 ------------------------------------------
+k_spinlock_key_t key = k_spin_lock(&lock);
+struct k_poll_event *poll_event;
+signal->result = result;
+signal->signaled = 1U;
+    F04F0101    mov.w r1, #1
+    6081        str r1, [r0, #8]
+--- dlist.h -- 538 -----------------------------------------
+static inline sys_dnode_t *sys_dlist_get(sys_dlist_t *list)
+{
+sys_dnode_t *node = NULL;
+if (!sys_dlist_is_empty(list)) {
+    D106        bne 0x000112FA
+--- asm_inline_gcc.h -- 127 --------------------------------
+"cpsie i;"
+"isb"
+: : : "memory");
+#elif defined(CONFIG_ARMV7_M_ARMV8_M_MAINLINE)
+__asm__ volatile(
+    F3858811    msr basepri, r5
+    F3BF8F6F    isb
+--- poll.c -- 427 ------------------------------------------
+poll_event = (struct k_poll_event *)sys_dlist_get(&signal->poll_events);
+if (poll_event == NULL) {
+k_spin_unlock(&lock, key);
+return 0;
+    2400        movs r4, #0
+--- poll.c -- 434 ------------------------------------------
+int rc = signal_poll_event(poll_event, K_POLL_STATE_SIGNALED);
+z_reschedule(&lock, key);
+return rc;
+}
+    4620        mov r0, r4
+    BD38        pop {r3-r5, pc}
+--- dlist.h -- 519 -----------------------------------------
+*/
+static inline void sys_dlist_remove(sys_dnode_t *node)
+{
+node->prev->next = node->next;
+    E9D30200    ldrd r0, r2, [r3, #0]
+    6010        str r0, [r2]
+--- dlist.h -- 524 -----------------------------------------
+node->next->prev = node->prev;
+    6818        ldr r0, [r3]
+    6042        str r2, [r0, #4]
+--- dlist.h -- 210 -----------------------------------------
+node->next = NULL;
+    2200        movs r2, #0
+--- dlist.h -- 211 -----------------------------------------
+node->prev = NULL;
+    E9C32200    strd r2, r2, [r3, #0]
+--- poll.c -- 430 ------------------------------------------
+k_spin_unlock(&lock, key);
+return 0;
+}
+int rc = signal_poll_event(poll_event, K_POLL_STATE_SIGNALED);
+    4618        mov r0, r3
+    F005FC13    bl 0x00016B36 <signal_poll_event>
+--- poll.c -- 435 ------------------------------------------
+z_reschedule(&lock, key);
+    4629        mov r1, r5
+--- poll.c -- 434 ------------------------------------------
+int rc = signal_poll_event(poll_event, K_POLL_STATE_SIGNALED);
+    4604        mov r4, r0
+--- poll.c -- 435 ------------------------------------------
+z_reschedule(&lock, key);
+    4801        ldr r0, =0x200022A9 <lock>
+    F005F9EC    bl 0x000166F2 <z_reschedule>
+--- poll.c -- 437 ------------------------------------------
+return rc;
+    E7EC        b 0x000112F6
+    200022A9    .word 0x200022A9
+--- uart.h -- 788 ------------------------------------------
+{
+const struct uart_driver_api *api =
+(const struct uart_driver_api *)dev->driver_api;
+if (api->irq_tx_disable) {
+    6843        ldr r3, [r0, #4]
+    6A1B        ldr r3, [r3, #32]
+    B103        cbz r3, 0x00011328
+--- uart.h -- 793 ------------------------------------------
+api->irq_tx_disable(dev);
+    4718        bx r3
+--- uart.h -- 794 ------------------------------------------
+}
+}
+    4770        bx lr
+--- gpio.h -- 197 ------------------------------------------
+* @param pin Pin number to configure.
+* @param flags Flags for pin configuration. IN/OUT, interrupt ...
+* @return 0 if successful, negative errno code on failure.
+*/
+static inline int gpio_pin_configure(struct device *port, u32_t pin,
+    6843        ldr r3, [r0, #4]
+    B410        push {r4}
+--- gpio.h -- 132 ------------------------------------------
+return api->config(port, access_op, pin, flags);
+    681C        ldr r4, [r3]
+    460A        mov r2, r1
+    46A4        mov r12, r4
+    2301        movs r3, #1
+    2100        movs r1, #0
+--- gpio.h -- 201 ------------------------------------------
+static inline int gpio_pin_configure(struct device *port, u32_t pin,
+int flags)
+{
+return gpio_config(port, GPIO_ACCESS_BY_PIN, pin, flags);
+}
+    BC10        pop {r4}
+--- gpio.h -- 132 ------------------------------------------
+return api->config(port, access_op, pin, flags);
+    4760        bx r12
+--- gpio.h -- 212 ------------------------------------------
+* @return 0 if successful, negative errno code on failure.
+*/
+static inline int gpio_pin_write(struct device *port, u32_t pin,
+u32_t value)
+{
+    6843        ldr r3, [r0, #4]
+    B410        push {r4}
+--- gpio.h -- 144 ------------------------------------------
+return api->write(port, access_op, pin, value);
+    685C        ldr r4, [r3, #4]
+    4613        mov r3, r2
+    46A4        mov r12, r4
+    460A        mov r2, r1
+--- gpio.h -- 214 ------------------------------------------
+static inline int gpio_pin_write(struct device *port, u32_t pin,
+u32_t value)
+{
+return gpio_write(port, GPIO_ACCESS_BY_PIN, pin, value);
+}
+    BC10        pop {r4}
+--- gpio.h -- 144 ------------------------------------------
+return api->write(port, access_op, pin, value);
+    2100        movs r1, #0
+    4760        bx r12
+--- main.c -- 702 ------------------------------------------
+}
+}
+void main()
+{
+    B507        push {r0-r2, lr}
+--- main.c -- 707 ------------------------------------------
+setup_adc();
+    F7F2FB5A    bl 0x00003A08 <setup_adc>
+--- main.c -- 708 ------------------------------------------
+setup_pwm();
+    F7F2FB36    bl 0x000039C4 <setup_pwm>
+--- main.c -- 709 ------------------------------------------
+volatile int* adc_value = sample_adc();
+    F7F2FB64    bl 0x00003A24 <sample_adc>
+--- main.c -- 710 ------------------------------------------
+volatile int adc_value2 = sample_adc();
+    F7F2FB62    bl 0x00003A24 <sample_adc>
+    9001        str r0, [sp, #4]
+--- main.c -- 711 ------------------------------------------
+}
+    B003        add sp, sp, #12
+    F85DFB04    pop.w {pc}
+--- mempool.c -- 30 ----------------------------------------
+* within that word as the return value
+*/
+static int get_bit_ptr(struct sys_mem_pool_base *p, int level, int bn,
+u32_t **word)
+{
+    B570        push {r4-r6, lr}
+    68C6        ldr r6, [r0, #12]
+--- mempool.c -- 35 ----------------------------------------
+u32_t *bitarray = level <= p->max_inline_level ?
+    F990000B    ldrsb.w r0, [r0, #11]
+    250C        movs r5, #12
+    434D        muls r5, r1
+--- mempool.c -- 36 ----------------------------------------
+p->levels[level].bits : p->levels[level].bits_p;
+    4288        cmp r0, r1
+    EB060405    add.w r4, r6, r5
+    BFB4        ite lt
+    5971        ldrlt r1, [r6, r5]
+    4621        movge r1, r4
+--- mempool.c -- 37 ----------------------------------------
+*word = &bitarray[bn / 32];
+    2420        movs r4, #32
+    FB92F4F4    sdiv r4, r2, r4
+    EB010184    add.w r1, r1, r4, lsl #2
+    6019        str r1, [r3]
+--- mempool.c -- 39 ----------------------------------------
+return bn & 0x1f;
+}
+    F002001F    and r0, r2, #31
+    BD70        pop {r4-r6, pc}
+--- mempool.c -- 42 ----------------------------------------
+static void set_free_bit(struct sys_mem_pool_base *p, int level, int bn)
+{
+    B507        push {r0-r2, lr}
+--- mempool.c -- 45 ----------------------------------------
+u32_t *word;
+int bit = get_bit_ptr(p, level, bn, &word);
+    AB01        add r3, sp, #4
+    F7FFFFE7    bl 0x00011368 <get_bit_ptr>
+--- mempool.c -- 47 ----------------------------------------
+*word |= (1<<bit);
+    9A01        ldr r2, [sp, #4]
+    2301        movs r3, #1
+    FA03F000    lsl.w r0, r3, r0
+    6813        ldr r3, [r2]
+    4303        orrs r3, r0
+    6013        str r3, [r2]
+--- mempool.c -- 49 ----------------------------------------
+}
+    B003        add sp, sp, #12
+    F85DFB04    pop.w {pc}
+--- mempool.c -- 50 ----------------------------------------
+static void clear_free_bit(struct sys_mem_pool_base *p, int level, int bn)
+{
+    B507        push {r0-r2, lr}
+--- mempool.c -- 53 ----------------------------------------
+u32_t *word;
+int bit = get_bit_ptr(p, level, bn, &word);
+    AB01        add r3, sp, #4
+    F7FFFFD9    bl 0x00011368 <get_bit_ptr>
+--- mempool.c -- 55 ----------------------------------------
+*word &= ~(1<<bit);
+    9A01        ldr r2, [sp, #4]
+    2301        movs r3, #1
+    FA03F000    lsl.w r0, r3, r0
+    6813        ldr r3, [r2]
+    EA230300    bic.w r3, r3, r0
+    6013        str r3, [r2]
+--- mempool.c -- 57 ----------------------------------------
+}
+    B003        add sp, sp, #12
+    F85DFB04    pop.w {pc}
+--- mempool.c -- 115 ---------------------------------------
+* level since using that does not introduce latency issues like locking
+* interrupts does.
+*/
+static inline int pool_irq_lock(struct sys_mem_pool_base *p)
+    F04F0320    mov.w r3, #32
+    F3EF8011    mrs r0, basepri
+    F3838811    msr basepri, r3
+    F3BF8F6F    isb
+--- mempool.c -- 122 ---------------------------------------
+return irq_lock();
+} else {
+return 0;
+}
+}
+    4770        bx lr
+--- mempool.c -- 127 ---------------------------------------
+static inline void pool_irq_unlock(struct sys_mem_pool_base *p, int key)
+{
+if (p->flags & SYS_MEM_POOL_KERNEL) {
+    07C3        lsls r3, r0, #31
+    D503        bpl 0x000113EA
+--- asm_inline_gcc.h -- 127 --------------------------------
+"cpsie i;"
+"isb"
+: : : "memory");
+#elif defined(CONFIG_ARMV7_M_ARMV8_M_MAINLINE)
+__asm__ volatile(
+    F3818811    msr basepri, r1
+    F3BF8F6F    isb
+--- mempool.c -- 129 ---------------------------------------
+{
+if (p->flags & SYS_MEM_POOL_KERNEL) {
+irq_unlock(key);
+}
+}
+    4770        bx lr
+--- mempool.c -- 71 ----------------------------------------
+{
+    E92D47F0    push.w {r4-r10, lr}
+--- mempool.c -- 72 ----------------------------------------
+int i;
+size_t buflen = p->n_max * p->max_sz, sz = p->max_sz;
+    6843        ldr r3, [r0, #4]
+    8905        ldrh r5, [r0, #8]
+--- mempool.c -- 71 ----------------------------------------
+{
+    4604        mov r4, r0
+--- mempool.c -- 72 ----------------------------------------
+int i;
+size_t buflen = p->n_max * p->max_sz, sz = p->max_sz;
+u32_t *bits = (u32_t *)((u8_t *)p->buf + buflen);
+    6800        ldr r0, [r0]
+--- mempool.c -- 75 ----------------------------------------
+p->max_inline_level = -1;
+for (i = 0; i < p->n_levels; i++) {
+    F894E00A    ldrb.w lr, [r4, #10]
+--- mempool.c -- 73 ----------------------------------------
+size_t buflen = p->n_max * p->max_sz, sz = p->max_sz;
+    435D        muls r5, r3
+--- mempool.c -- 74 ----------------------------------------
+u32_t *bits = (u32_t *)((u8_t *)p->buf + buflen);
+p->max_inline_level = -1;
+    22FF        movs r2, #0xFF
+--- mempool.c -- 74 ----------------------------------------
+u32_t *bits = (u32_t *)((u8_t *)p->buf + buflen);
+    4428        add r0, r5
+--- mempool.c -- 75 ----------------------------------------
+p->max_inline_level = -1;
+    72E2        strb r2, [r4, #11]
+--- mempool.c -- 77 ----------------------------------------
+for (i = 0; i < p->n_levels; i++) {
+    2100        movs r1, #0
+--- mempool.c -- 79 ----------------------------------------
+int nblocks = buflen / sz;
+sys_dlist_init(&p->levels[i].free_list);
+    F04F080C    mov.w r8, #12
+--- mempool.c -- 83 ----------------------------------------
+if (nblocks <= sizeof(p->levels[i].bits)*8) {
+p->max_inline_level = i;
+} else {
+p->levels[i].bits_p = bits;
+bits += (nblocks + 31)/32;
+    F04F0920    mov.w r9, #32
+--- mempool.c -- 78 ----------------------------------------
+for (i = 0; i < p->n_levels; i++) {
+    458E        cmp lr, r1
+    DC05        bgt 0x0001141E
+--- mempool.c -- 89 ----------------------------------------
+sz = WB_DN(sz / 4);
+}
+for (i = 0; i < p->n_max; i++) {
+    2500        movs r5, #0
+    8923        ldrh r3, [r4, #8]
+    42AB        cmp r3, r5
+    DC1F        bgt 0x0001145A
+--- mempool.c -- 95 ----------------------------------------
+sys_dlist_append(&p->levels[0].free_list, block);
+set_free_bit(p, 0, i);
+}
+}
+    E8BD87F0    pop.w {r4-r10, pc}
+--- mempool.c -- 81 ----------------------------------------
+sys_dlist_init(&p->levels[i].free_list);
+    F8D4C00C    ldr.w r12, [r4, #12]
+--- mempool.c -- 79 ----------------------------------------
+int nblocks = buflen / sz;
+    FBB5F2F3    udiv r2, r5, r3
+--- mempool.c -- 80 ----------------------------------------
+sys_dlist_init(&p->levels[i].free_list);
+    FB08F701    mul r7, r8, r1
+--- mempool.c -- 82 ----------------------------------------
+if (nblocks <= sizeof(p->levels[i].bits)*8) {
+    2A20        cmp r2, #32
+--- mempool.c -- 81 ----------------------------------------
+sys_dlist_init(&p->levels[i].free_list);
+    EB0C0607    add.w r6, r12, r7
+--- mempool.c -- 83 ----------------------------------------
+if (nblocks <= sizeof(p->levels[i].bits)*8) {
+p->max_inline_level = i;
+} else {
+p->levels[i].bits_p = bits;
+bits += (nblocks + 31)/32;
+    BF88        it hi
+    321F        addhi r2, #31
+--- mempool.c -- 81 ----------------------------------------
+sys_dlist_init(&p->levels[i].free_list);
+    F1060A04    add.w r10, r6, #4
+--- mempool.c -- 86 ----------------------------------------
+p->levels[i].bits_p = bits;
+bits += (nblocks + 31)/32;
+}
+sz = WB_DN(sz / 4);
+    EA4F0393    lsr.w r3, r3, #2
+--- dlist.h -- 191 -----------------------------------------
+static inline void sys_dlist_init(sys_dlist_t *list)
+{
+list->head = (sys_dnode_t *)list;
+list->tail = (sys_dnode_t *)list;
+    E9C6AA01    strd r10, r10, [r6, #4]
+--- mempool.c -- 83 ----------------------------------------
+if (nblocks <= sizeof(p->levels[i].bits)*8) {
+p->max_inline_level = i;
+} else {
+p->levels[i].bits_p = bits;
+bits += (nblocks + 31)/32;
+    BF8A        itet hi
+    FB92F2F9    sdivhi r2, r2, r9
+--- mempool.c -- 84 ----------------------------------------
+p->max_inline_level = i;
+    72E1        strbls r1, [r4, #11]
+--- mempool.c -- 85 ----------------------------------------
+} else {
+p->levels[i].bits_p = bits;
+    F84C0007    strhi.w r0, [r12, r7]
+--- mempool.c -- 87 ----------------------------------------
+bits += (nblocks + 31)/32;
+}
+sz = WB_DN(sz / 4);

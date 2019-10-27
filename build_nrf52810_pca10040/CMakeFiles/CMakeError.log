@@ -1,0 +1,36 @@
+Compiling the C compiler identification source file "CMakeCCompilerId.c" failed.
+Compiler: C:/Program Files (x86)/GNU Tools Arm Embedded/7 2018-q2-update/bin/arm-none-eabi-gcc.exe 
+Build flags: 
+Id flags:  
+
+The output was:
+1
+c:/program files (x86)/gnu tools arm embedded/7 2018-q2-update/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc.a(lib_a-exit.o): In function `exit':
+exit.c:(.text.exit+0x2c): undefined reference to `_exit'
+collect2.exe: error: ld returned 1 exit status
+
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+Compiler: C:/Program Files (x86)/GNU Tools Arm Embedded/7 2018-q2-update/bin/arm-none-eabi-gcc.exe 
+Build flags: 
+Id flags:  
+
+The output was:
+1
+c:/program files (x86)/gnu tools arm embedded/7 2018-q2-update/bin/../lib/gcc/arm-none-eabi/7.3.1/../../../../arm-none-eabi/lib\libc.a(lib_a-exit.o): In function `exit':
+exit.c:(.text.exit+0x2c): undefined reference to `_exit'
+collect2.exe: error: ld returned 1 exit status
+
+
+Performing C SOURCE FILE Test check_fmacro_prefix_map_C__Users_Olle_Documents_ncs_ncs_nrf_samples_bluetooth_peripheral_uart_CMAKE_SOURCE_DIR_C__nostartfiles__nostdlib__isystem__c__program_files__x86__gnu_tools_arm_embedded_7_2018_q2_update_bin____lib_gcc_arm_none_eabi_7_3_1_include___isystem__c__program_files__x86__gnu_tools_arm_embedded_7_2018_q2_update_bin____lib_gcc_arm_none_eabi_7_3_1_include_fixed___Wl___unresolved_symbols_ignore_in_object_files failed with the following output:
+Change Dir: C:/Users/Olle/Documents/ncs/ncs/nrf/samples/bluetooth/peripheral_uart/build_nrf52810_pca10040/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/ProgramData/chocolatey/bin/ninja.exe cmTC_6cd6b && [1/2] Building C object CMakeFiles/cmTC_6cd6b.dir/src.c.obj
+FAILED: CMakeFiles/cmTC_6cd6b.dir/src.c.obj 
+C:\PROGRA~2\GNUTOO~1\72018-~1\bin\AR19DD~1.EXE   -Dcheck_fmacro_prefix_map_C__Users_Olle_Documents_ncs_ncs_nrf_samples_bluetooth_peripheral_uart_CMAKE_SOURCE_DIR_C__nostartfiles__nostdlib__isystem__c__program_files__x86__gnu_tools_arm_embedded_7_2018_q2_update_bin____lib_gcc_arm_none_eabi_7_3_1_include___isystem__c__program_files__x86__gnu_tools_arm_embedded_7_2018_q2_update_bin____lib_gcc_arm_none_eabi_7_3_1_include_fixed___Wl___unresolved_symbols_ignore_in_object_files -nostartfiles -nostdlib -isystem "c:/program files (x86)/gnu tools arm embedded/7 2018-q2-update/bin/../lib/gcc/arm-none-eabi/7.3.1/include" -isystem "c:/program files (x86)/gnu tools arm embedded/7 2018-q2-update/bin/../lib/gcc/arm-none-eabi/7.3.1/include-fixed" -Wl,--unresolved-symbols=ignore-in-object-files   -fmacro-prefix-map=C:/Users/Olle/Documents/ncs/ncs/nrf/samples/bluetooth/peripheral_uart=CMAKE_SOURCE_DIR -o CMakeFiles/cmTC_6cd6b.dir/src.c.obj   -c src.c
+AR19DD~1.EXE: error: unrecognized command line option '-fmacro-prefix-map=C:/Users/Olle/Documents/ncs/ncs/nrf/samples/bluetooth/peripheral_uart=CMAKE_SOURCE_DIR'
+ninja: build stopped: subcommand failed.
+
+
+Source file was:
+int main(void) { return 0; }

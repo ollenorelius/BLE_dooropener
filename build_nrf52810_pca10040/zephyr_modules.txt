@@ -1,0 +1,8 @@
+"nrf":"C:\Users\Olle\Documents\ncs\ncs\nrf"
+"nffs":"C:\Users\Olle\Documents\ncs\ncs\modules\fs\nffs"
+"segger":"C:\Users\Olle\Documents\ncs\ncs\modules\debug\segger"
+"mbedtls":"C:\Users\Olle\Documents\ncs\ncs\modules\crypto\mbedtls"
+"mcuboot":"C:\Users\Olle\Documents\ncs\ncs\mcuboot\zephyr"
+"mcumgr":"C:\Users\Olle\Documents\ncs\ncs\modules\lib\mcumgr"
+"tinycbor":"C:\Users\Olle\Documents\ncs\ncs\modules\lib\tinycbor"
+"nrfxlib":"C:\Users\Olle\Documents\ncs\ncs\nrfxlib"

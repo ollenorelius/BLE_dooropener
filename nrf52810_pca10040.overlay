@@ -1,0 +1,3 @@
+// SEGGER Embedded Studio auto generated
+&button0 { label = "Push button switch 0"; };
+&button1 { label = "Push button switch 1"; };

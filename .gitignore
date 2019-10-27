@@ -81,3 +81,5 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+build_nrf52810_pca10040/CMakeCache.txt
+*.d
