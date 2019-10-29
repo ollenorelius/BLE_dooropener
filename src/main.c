@@ -16,6 +16,7 @@
 
 #include <device.h>
 #include <soc.h>
+#include <nrf.h>
 #include <gpio.h>
 #include <drivers/pwm.h>
 
@@ -101,6 +102,14 @@ struct ble_message_t msg;
 struct ecb_t to_encrypt;
 
 static K_SEM_DEFINE(ble_init_ok, 0, 2);
+
+void TIMER0_IRQHandler(void);
+K_TIMER_DEFINE(my_timer, TIMER0_IRQHandler, NULL);
+void TIMER0_IRQHandler(void)
+{
+  set_led_state(RUN_STATUS_LED, 0);
+  k_timer_stop(&my_timer);
+}
 
 //extern void connected(struct bt_conn*conn, u8_t err);
 
@@ -515,6 +524,7 @@ void configure_buttons(void)
 	}
 }
 
+
 static void led_blink_thread(void)
 {
 	int    blink_status       = 0;
@@ -560,22 +570,22 @@ static void led_blink_thread(void)
 	init_gpio();
 
 	for (;;) {
-                if (blink_status)
-                {
-                  vcc = 5.0f/3.0f*sample_adc();
-                }
-		set_led_state(RUN_STATUS_LED, (++blink_status) % 2);
-                //set_led_state(FIVE_V_EN, (blink_status) % 2);
+                vcc = 5.0f/3.0f*sample_adc();
                 encrypt();
+                
+		set_led_state(RUN_STATUS_LED, 1);
+                //set_led_state(FIVE_V_EN, (blink_status) % 2);
+                k_timer_start(&my_timer, 0, 2);
 
                 //pwm_pin_set_usec(pwm_dev, 23,
 		//			PERIOD, (blink_status % 2) * 1000 + 1000);
 
 		k_sleep(RUN_LED_BLINK_INTERVAL*0.01);
-                set_led_state(RUN_STATUS_LED, (++blink_status) % 2);
+                set_led_state(RUN_STATUS_LED, 0);
                 k_sleep(RUN_LED_BLINK_INTERVAL*0.99);
 	}
 }
+
 
 void ble_write_thread(void)
 {
@@ -695,7 +705,6 @@ void encrypt()
   msg.nonce = random_char();
   msg.check = 0xDEAD;
 
-  struct ecb_t* derp = (struct ecb_t*)&msg;
   for (int i = 0; i < 16; i++) 
   {
     to_encrypt.key[i] = 48;
@@ -763,3 +772,5 @@ K_THREAD_DEFINE(ble_write_thread_id, STACKSIZE, ble_write_thread, NULL, NULL,
 //		NULL, PRIORITY, 0, K_NO_WAIT);
 K_THREAD_DEFINE(man_pwm_thread_id, STACKSIZE/8, manual_pwm_thread, NULL, NULL,
 		NULL, PRIORITY, 0, K_NO_WAIT);
+
+
