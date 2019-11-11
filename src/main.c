@@ -111,6 +111,15 @@ void TIMER0_IRQHandler(void)
   k_timer_stop(&my_timer);
 }
 
+void turn_off_five_v(void);
+K_TIMER_DEFINE(my_timer2, turn_off_five_v, NULL);
+void turn_off_five_v(void)
+{
+  set_led_state(FIVE_V_EN, 0);
+  k_timer_stop(&my_timer2);
+}
+
+
 //extern void connected(struct bt_conn*conn, u8_t err);
 
 
@@ -287,13 +296,14 @@ void bt_receive_cb(struct bt_conn *conn, const u8_t *const data,
 
                 if (data[pos] == 'd')
                 {
-                  led_blink_state = 1;
-                  set_led_state(CON_STATUS_LED, 0);
+                  set_led_state(FIVE_V_EN, 1);
+                  k_timer_start(&my_timer, 0, 2000);
                   pulse_width = OPEN;
                 }
                 else if (data[pos] == 'e')
                 {
-                  led_blink_state = 0;
+                  set_led_state(FIVE_V_EN, 1);
+                  k_timer_start(&my_timer, 0, 2000);
                   pulse_width = CLOSED;
                 }
 		if ((len - pos) > tx_data_size) {
@@ -574,15 +584,11 @@ static void led_blink_thread(void)
                 encrypt();
                 
 		set_led_state(RUN_STATUS_LED, 1);
-                //set_led_state(FIVE_V_EN, (blink_status) % 2);
                 k_timer_start(&my_timer, 0, 2);
 
                 //pwm_pin_set_usec(pwm_dev, 23,
 		//			PERIOD, (blink_status % 2) * 1000 + 1000);
 
-		k_sleep(RUN_LED_BLINK_INTERVAL*0.01);
-                set_led_state(RUN_STATUS_LED, 0);
-                k_sleep(RUN_LED_BLINK_INTERVAL*0.99);
 	}
 }
 
